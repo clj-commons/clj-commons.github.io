@@ -37,12 +37,15 @@
     [:li "Original author: " [:a {:href (:html_url originator)} (:name originator)]]
     [:li "Maintainers: " (interpose ", " (map (fn [c] [:a {:href (:html_url c)} (:name c) ]) code-owners))]]])
 
-(def own-repos? #{"clj-commons.github.io" "meta" "formatter"})
+(def own-repos? #{"clj-commons.github.io" "meta" "formatter" "infra" ".github"})
+
+(defn print-repo [repo] (println repo) repo)
 
 (defn make-project-list []
   (->> (repos/org-repos "clj-commons" opts)
        (sort-by :stargazers_count)
        (reverse)
+       (map print-repo) ; to get a sense of progress when running this!
        (remove (comp own-repos? :name))
        (map with-original-author)
        (map with-code-owners)
