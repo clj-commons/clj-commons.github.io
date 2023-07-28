@@ -16,6 +16,7 @@
                       (slurp (str "https://raw.githubusercontent.com/clj-commons/" name "/master/CODEOWNERS"))))]
     (->> owners
          (str/split-lines)
+         (remove #(str/starts-with? % "#"))
          (mapcat (fn [l]
                    (->> (str/split l #"\s+")
                         (drop 1)
