@@ -1,0 +1,62 @@
+<head>
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 18px;
+            color: #444;
+            padding: 0 10px
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Maintaining Projects</h1>
+
+<p>Once a project has been accepted into CLJ Commons, there is an expectation that the project will be well-maintained, and will be kept up to date with the latest versions of Clojure and other dependencies.</p>
+
+<h2>Being a Maintainer</h2>
+
+<p>Each project under the <code>clj-commons</code> organization needs to have at least one maintainer, and the GitHub usernames of those maintainers should be listed
+ in the <code>.github/CODEOWNERS</code> file.
+ In addition, there should be a <code>ORIGINATOR</code> file added to the project root that contains the GitHub username of the person who originally created the project.</p>
+
+ <p>These files are used to automatically generate and publish the <a href="https://clj-commons.org/projects.html">list of projects</a> on the CLJ Commons website. In addition, the <code>CODEOWNERS</code> is used by GitHub to identify who should be invited to review Pull Requests for various parts of the project.</p>
+
+<p>CLJ Commons believes that the following should be considered the minimum requirements for a 'well-maintained' project:</p>
+<ul>
+<li>Passing continuous integration (see below)</li>
+<li>Responsive to issues and pull requests</li>
+<li>Documentation (<a href="https://cljdoc.org">cljdoc.org</a> makes this very easy)
+<li>Regularly creating releases</li>
+<li>Staying up to date with new Clojure and JVM releases</li>
+</ul>
+
+ <p>CLJ Commons does not impose any additional
+ restrictions on how the individual projects are run, other than what is stated in this page.</p>
+
+<p>This means that Pull Request review protocol, release cycles, and post-release announcements are up to the
+ maintainer of the project, even though we encourage announcing new releases to the <a href="https://groups.google.com/group/clojure">official Clojure Google Group</a>
+ and/or the <code>#announcements</code> / <code>#releases</code> channels in the <a href="http://clojurians.net">Clojurians Slack</a>. In addition, coding style is up to the maintainers of
+ the project, but clj-commons recommends following <a href="https://guide.clojure.style/">The Clojure Style Guide</a>.</p>
+
+<h2>Continuous Integration</h2>
+
+<p>We strongly encourage maintainers to setup and depend on Continuous Integration for all CLJ Commons projects. The founders of the project were most familiar with <a href="https://circleci.com">CircleCI</a>, so that is what most of our projects currently use -- and you'll find it easy to get help from other CLJ Commons maintainers if you have questions about CircleCI.</p>
+
+<p>The CircleCI GitHub application is already configured at the organization level. Simply adding a valid configuration (<a href="https://circleci.com/docs/2.0/language-clojure/">check the official documentation</a>) is enough to enable Continuous Integration (of branches and pull requests).</p>
+
+<p>You can also use GitHub Actions if you are more comfortable with that.</p>
+
+<h2>Project Acceptance</h2>
+
+<p>How projects get accepted by CLJ Commons is discussed in our <a href="https://clj-commons.org/accepting-projects.html">project acceptance guidelines</a>.</p>
+
+</body>

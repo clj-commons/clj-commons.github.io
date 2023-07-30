@@ -1,0 +1,64 @@
+<head>
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 18px;
+            color: #444;
+            padding: 0 10px
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.2
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Accepting Projects</h1>
+
+<p>Before adopting a project into CLJ Commons, there are some entry criteria that need to be satisfied:</p>
+
+<ul>
+<li>The project is 'unmaintained'. This is subjective, and there are many libraries which are just 'done'. Indications that a project is unmaintained could be: the library breaking with new Java or Clojure versions, issues and PRs not being addressed for years, no recent releases, no commits for years, or the maintainer is no longer involved with Clojure.</li>
+<li>The project is notable, useful, and currently being used by people. This is inherently subjective, but some evidence for this could be number of stars on GitHub, recent issues/PRs, number of downloads on Clojars, how much work went into creating it, or if any notable projects depend on it. An example of a project that wouldn't be accepted is a small library created by one person that only they use.</li>
+<li>There is at least one person who wants to be a maintainer of the project. These maintainers will be listed in a <code>CODEOWNERS<code> file. We don't want the new home of the project to become unmaintained as well.</li>
+<li>We have attempted to talk to the original owner of the project and they are happy to transfer the project. The goal is not to be forking projects away from people who want to manage the project themselves.</li>
+</ul>
+
+<h2>Proposing a Project</h2>
+
+<p>If you would like to see a project transferred to CLJ Commons for future maintenance that you believe meets the above criteria, you can <a href="https://github.com/clj-commons/meta/issues">create an issue to propose the project</a>, providing relevant information about the project's use, and suggesting a new maintainer (or volunteering to maintain it yourself).</p>
+
+<p>The CLJ Commons team will review the proposal, based on the criteria above, and if at least two members of the team agree that the project should be transferred, we will attempt to contact the original owner of the project to discuss the transfer. Currently, that team is <a href="https://github.com/slipset">Erik Assum</a>, <a href="https://github.com/danielcompton">Daniel Compton</a>, and <a href="https://github.com/seancorfield">Sean Corfield</a>.</p>
+
+<h2>Transferring a Project</h2>
+
+<p>When a project is adopted into the <code>clj-commons</code> organization on GitHub, a transfer of ownership is preferred over forking.
+ There are several reasons for this:</p>
+<ul>
+<li>The adoption is somewhat formalized and friendly, the original authors need to give their blessing for
+ this to happen,</li>
+<li>All GitHub metainfo, stars, issues, PRs, etc are transferred in a transfer, but lost in a fork.</li>
+</ul>
+<p>We should resort to forking only if the original maintainers remain unresponsive to our inquiries.
+ Currently, unresponsive means not having replied to our request within two months of repeated outreach.</p>
+
+ <h2>Project Artifact Coordinates</h2>
+
+ <p>As with transfer vs forking, artefact coordinates also need consideration. There are limitations to
+ how Clojars works, which makes it hard for a Clojars group to change ownership of a single artefact
+ within a group. This means that for certain organizations/authors, it is impossible to let CLJ Commons
+ continue artefact publication under their original group. Even so, we prefer to keep the artefact coordinates the same
+ because this will let tools like <a href="https://github.com/xsc/lein-ancient">lein-ancient</a> and <a href="https://github.com/liquidz/antq">antq</a> continue to work
+ with projects whose source is moved to the <code>clj-commons</code> organization on GitHub.
+</p>
+
+<h2>Project Maintenance</h2>
+
+<p>Once a project has been transferred to CLJ Commons, it will be maintained according to our <a href="https://clj-commons.org/maintaining-projects.html">project maintenance guidelines</a>.</p>
+
+</body>
