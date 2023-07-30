@@ -67,11 +67,28 @@
         h3 {
             line-height: 1.2
         }
+        .logo {
+          margin: 10px 0px 0px -50px;
+          float: left;
+        }
+        .logo img {
+          height: 25px; width: 25px;
+        }
     </style>")
 
 (def preamble
-  [:p "Here is a list of projects currently under the clj-commons umbrella. Some of the projects have dedicated maintainers, others are maintained by clj-commons. If you would want to take over maintainership of any of the projects maintained by @clj-commons, please drop us an issue either in the <a href = \"https://github.com/clj-commons/meta\">meta</a> project or in the project itself."])
+  [[:div {:class "logo"}
+    [:a {:href "https://clj-commons.org/"
+         :title "CLJ Commons (Home)"}
+     [:img {:alt "CLJ Commons Logo"
+            :src "https://clj-commons.org/logo.png"}]]]
+   [:h1 "Projects"]
+   [:p "Here is a list of projects currently under the clj-commons umbrella. Some of the projects have dedicated maintainers, others are maintained by clj-commons. If you would want to take over maintainership of any of the projects maintained by @clj-commons, please drop us an issue either in the <a href = \"https://github.com/clj-commons/meta\">meta</a> project or in the project itself."]])
 
 (comment
-  (spit "projects.html" (hiccup/html [:head style [:body preamble (make-project-list)]]))
+  (spit "projects.html"
+        (hiccup/html [:head style
+                      (-> [:body]
+                          (into preamble)
+                          (into (make-project-list)))]))
   )
