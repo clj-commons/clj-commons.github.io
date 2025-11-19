@@ -5,3 +5,4 @@
 .lsp/.cache
 .nrepl-port
 .portal/vs-code.edn
+.calva/mcp-server/port
