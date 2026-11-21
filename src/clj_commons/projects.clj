@@ -115,7 +115,7 @@
     [:a {:href "/accepting-projects.html"} "Accepting projects"]
     [:a {:href "/maintaining-projects.html"} "Maintaining projects"]
     [:a {:href "https://github.com/clj-commons"} "GitHub"]
-    [:a {:href "http://clojurians.net"} "Clojurians Slack"]]])
+    [:a {:href "https://clojurians.net"} "Clojurians Slack"]]])
 
 (defn page [projects]
   [:html {:lang "en"}
