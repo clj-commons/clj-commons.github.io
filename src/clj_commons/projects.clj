@@ -10,11 +10,42 @@
 
 (def opts {:oauth-token (System/getenv "GITHUB_TOKEN")})
 
+(def ^:dynamic *retry-delays-ms*
+  "Waits between attempts."
+  [1000 2000 4000 8000])
+
+(defn with-retries
+  "Calls `f`, retrying with exponential backoff if it throws."
+  [what f]
+  (loop [[delay & delays] *retry-delays-ms*]
+    (let [result (try {:value (f)}
+                      (catch Exception e
+                        (when-not delay
+                          (throw (ex-info (str "Giving up on " what) {} e)))
+                        (println "Retrying" what "in" delay "ms:" (ex-message e))))]
+      (if result
+        (:value result)
+        (do (Thread/sleep (long delay))
+            (recur delays))))))
+
+(defn api-error [resp]
+  (ex-info (str "GitHub API returned " (:status resp "an unexpected response"))
+           {:response resp}))
+
+(defn org-repos []
+  (with-retries "listing clj-commons repos"
+    #(let [repos (repos/org-repos "clj-commons" (assoc opts :all-pages true))]
+       (if (and (sequential? repos) (every? :name repos))
+         repos
+         (throw (api-error repos))))))
+
 (defn raw-file
   "Contents of `path` on the repo's default branch, or nil if it doesn't exist."
   [{:keys [name default_branch]} path]
-  (try (slurp (str "https://raw.githubusercontent.com/clj-commons/" name "/" default_branch "/" path))
-       (catch java.io.FileNotFoundException _ nil)))
+  (let [url (str "https://raw.githubusercontent.com/clj-commons/" name "/" default_branch "/" path)]
+    (with-retries url
+      #(try (slurp url)
+            (catch java.io.FileNotFoundException _ nil)))))
 
 (defn usernames
   "GitHub usernames (without the @) mentioned in an ORIGINATOR or CODEOWNERS file."
@@ -26,9 +57,13 @@
 
 (defn user
   "The user's display name, falling back to their @username when GitHub has
-  no name for them or the lookup fails."
+  no name for them or the account no longer exists."
   [login]
-  (let [u (users/user login opts)]
+  (let [u (with-retries (str "GitHub user " login)
+            #(let [u (users/user login opts)]
+               (cond (:login u) u
+                     (= 404 (:status u)) nil
+                     :else (throw (api-error u)))))]
     {:login login
      :name  (or (not-empty (:name u)) (str "@" login))}))
 
@@ -64,7 +99,7 @@
 (def own-repos? #{"clj-commons.github.io" "meta" "formatter" "infra" ".github"})
 
 (defn make-project-list []
-  (->> (repos/org-repos "clj-commons" (assoc opts :all-pages true))
+  (->> (org-repos)
        (remove :archived)
        (remove (comp own-repos? :name))
        (sort-by :stargazers_count >)
