@@ -86,7 +86,7 @@
                   :data-author (str/replace-first (:name originator "") #"^@" "")}
    [:header
     [:h2 [:a {:href html_url} name]]
-    [:a.stars {:href (str html_url "/stargazers")
+    [:a.stars {:href html_url
                :title (str stargazers_count " GitHub stars")}
      (format "★ %,d" stargazers_count)]]
    (when description [:p description])
