@@ -78,3 +78,140 @@ footer nav {
   flex-wrap: wrap;
   gap: 4px 20px;
 }
+
+/* Projects page: wider body so the card grid can reach three columns. */
+body.wide {
+  max-width: 980px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.controls[hidden] {
+  display: none;
+}
+
+.controls input,
+.controls select,
+.controls button {
+  box-sizing: border-box;
+  height: 36px;
+  font: inherit;
+  line-height: 1.2;
+  color: inherit;
+  background-color: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+/* Drop the native select styling so it matches the button; the chevron is
+   drawn with gradients so it follows the theme colours. */
+.controls select {
+  appearance: none;
+  padding-right: 30px;
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.controls select:hover,
+.controls button:hover {
+  border-color: var(--muted);
+}
+
+.controls button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.controls button svg {
+  transition: transform 0.15s;
+}
+
+.controls button[data-dir="asc"] svg {
+  transform: rotate(180deg);
+}
+
+.controls input {
+  flex: 0 1 220px;
+  margin-left: auto;
+}
+
+#project-count {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card[hidden] {
+  display: none;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+
+.card .stars {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.card .stars:hover {
+  text-decoration: underline;
+}
+
+.card p {
+  margin: 0 0 12px;
+}
+
+.card dl {
+  margin: 0;
+  color: var(--muted);
+}
+
+.card dt {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card dd {
+  margin: 0 0 8px;
+}
