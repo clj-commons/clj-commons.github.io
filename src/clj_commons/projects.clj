@@ -1,14 +1,14 @@
 (ns clj-commons.projects
   "Generates projects.html. Run with:
 
-     clojure -X clj-commons.projects/generate!"
+     GITHUB_TOKEN=$(gh auth token) clojure -X clj-commons.projects/generate!"
   (:require [tentacles.repos :as repos]
             [tentacles.users :as users]
             [clojure.string :as str]
             [hiccup2.core :as h])
   (:import (org.jsoup Jsoup)))
 
-(def opts {:auth "slipset:redacted"})
+(def opts {:oauth-token (System/getenv "GITHUB_TOKEN")})
 
 (defn raw-file
   "Contents of `path` on the repo's default branch, or nil if it doesn't exist."
