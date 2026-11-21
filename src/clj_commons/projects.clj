@@ -160,7 +160,8 @@
 
 (defn generate! [_]
   (spit "projects.html"
-        (pretty-print (str "<!DOCTYPE html>" (h/html (page (make-project-list)))))))
+        (str (pretty-print (str "<!DOCTYPE html>" (h/html (page (make-project-list)))))
+             "\n")))
 
 (comment
   (generate! nil))
